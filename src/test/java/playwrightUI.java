@@ -1,5 +1,3 @@
-package tests;
-
 import configurations.BaseTest;
 import configurations.BaseUri;
 import dataProviders.Navbar;
