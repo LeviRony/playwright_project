@@ -1,9 +1,9 @@
-
 import configurations.BaseTestApi;
 import com.microsoft.playwright.APIResponse;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.testng.annotations.Test;
+import utilities.JsonEdit;
 
 import static org.testng.Assert.*;
 
@@ -12,6 +12,8 @@ public class ApiTest extends BaseTestApi {
     @Test
     public void getPost() {
         APIResponse response = request.get("/posts/1");
+        // Perform pretty print
+        JsonEdit.prettyPrint(response);
         assertTrue(response.ok(), "Response should be OK");
 
         String body = response.text();
