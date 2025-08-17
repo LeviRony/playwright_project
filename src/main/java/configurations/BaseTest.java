@@ -10,6 +10,7 @@ public class BaseTest {
     protected BrowserContext context;
     protected Page page;
 
+
     @BeforeClass
     @Parameters("browserName")
     public void launchBrowser(String browserName) {

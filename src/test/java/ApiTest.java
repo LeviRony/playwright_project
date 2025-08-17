@@ -1,20 +1,13 @@
-import com.microsoft.playwright.*;
-import org.testng.annotations.*;
+
+import configurations.BaseTestApi;
+import com.microsoft.playwright.APIResponse;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
 
-public class ApiTest {
-    static Playwright playwright;
-    static APIRequestContext request;
-
-    @BeforeClass
-    public void setup() {
-        playwright = Playwright.create();
-        request = playwright.request().newContext(new APIRequest.NewContextOptions()
-                .setBaseURL("https://jsonplaceholder.typicode.com")); // sample API
-    }
+public class ApiTest extends BaseTestApi {
 
     @Test
     public void getPost() {
@@ -26,10 +19,5 @@ public class ApiTest {
 
         System.out.println("Title: " + json.get("title").getAsString());
         assertEquals(json.get("id").getAsInt(), 1);
-    }
-
-    @AfterClass
-    public void teardown() {
-        playwright.close();
     }
 }
