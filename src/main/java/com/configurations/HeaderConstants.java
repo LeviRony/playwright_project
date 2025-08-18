@@ -1,4 +1,4 @@
-package configurations;
+package com.configurations;
 
 public class HeaderConstants {
 

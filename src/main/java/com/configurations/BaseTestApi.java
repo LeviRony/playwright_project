@@ -1,9 +1,9 @@
-package configurations;
+package com.configurations;
 
 import com.microsoft.playwright.*;
 import org.testng.annotations.*;
 
-import static configurations.BaseUri.*;
+import static com.configurations.BaseUri.*;
 
 public class BaseTestApi {
 

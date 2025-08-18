@@ -1,4 +1,4 @@
-package configurations;
+package com.configurations;
 
 public class Timeouts {
     public static int SEC_5 = 5000;

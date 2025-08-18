@@ -1,11 +1,11 @@
 package testCases;
 
-import configurations.BaseTestApi;
+import com.configurations.BaseTestApi;
 import com.microsoft.playwright.APIResponse;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.testng.annotations.Test;
-import utilities.JsonEdit;
+import com.utilities.JsonEdit;
 
 import static org.testng.Assert.*;
 

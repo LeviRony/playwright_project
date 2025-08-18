@@ -1,7 +1,6 @@
 package testCases;
-
-import configurations.BaseTest;
-import configurations.BaseUri;
+import com.configurations.BaseTest;
+import com.configurations.BaseUri;
 import dataProviders.Navbar;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +10,7 @@ public class linkedin extends BaseTest {
 
     @Test(testName = "Login")
     public void login() {
-        navigateTest(BaseUri.linkedinUrl());
+        navigateTo(BaseUri.linkedinUrl());
         Navbar navbar = new Navbar(page);
         Assert.assertTrue(page.locator("[data-test-id=hero__headline]").isVisible());
         LoginPage loginPage = new LoginPage(page);

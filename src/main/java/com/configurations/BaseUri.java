@@ -1,6 +1,6 @@
-package configurations;
+package com.configurations;
 
-import static configurations.AutomationEnvProperties.ENV_TYPE;
+import static com.configurations.AutomationEnvProperties.ENV_TYPE;
 
 public class BaseUri {
 

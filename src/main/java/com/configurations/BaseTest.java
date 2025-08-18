@@ -1,14 +1,14 @@
-package configurations;
+package com.configurations;
 
 import com.microsoft.playwright.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class BaseTest {
     Logger log = LoggerFactory.getLogger(BaseTest.class);
@@ -53,10 +53,7 @@ public class BaseTest {
         page = context.newPage();
     }
 
-    public void navigateTest(String uri) {
-        page.navigate(uri);
-        System.out.println("\u001B[34m[INFO] Navigated to: " + uri + "\u001B[0m");
-    }
+
 
     @AfterMethod
     public void closeContext(Method method) throws IOException {
