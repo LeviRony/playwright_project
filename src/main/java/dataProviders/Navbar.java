@@ -7,51 +7,53 @@ import static org.testng.Assert.*;
 
 public class Navbar {
 
-    private final Page page;
-    private final String toggleButton = "button[aria-label='Toggle navigation bar']";
-    private final String docsLink = "a[href='//docs/intro']";
-    private final String apiLink = "a[href='//docs/api/class-playwright']";
-    private final String dropdownLink = "a[role='button'][href='#']";
-    private final String accessibilityLink = "a[href='//docs/accessibility-testing']";
-    private final String communityLink = "a[href='//community/welcome']";
+    private static Page page;
+    private static final String toggleButton = "button[aria-label='Toggle navigation bar']";
+    private static final String docsLink = "a[href='//docs/intro']";
+    private static final String apiLink = "a[href='//docs/api/class-playwright']";
+    private static final String dropdownLink = "a[role='button'][href='#']";
+    private static final String accessibilityLink = "a[href='//docs/accessibility-testing']";
+    private static final String communityLink = "a[href='//community/welcome']";
+
+
     public Navbar(Page page) {
-        this.page = page;
+        Navbar.page = page;
     }
 
     @Step
-    public void clickToggleButton() {
+    public static void clickToggleButton() {
         page.click(toggleButton);
     }
 
     @Step
-    public void validateToggleOn() {
+    public static void validateToggleOn() {
         Locator toggle = page.locator(toggleButton);
         boolean isOn = toggle.getAttribute("aria-checked").equals("true");
     }
 
     @Step
-    public void clickDocsLink() {
+    public static void clickDocsLink() {
         page.click(docsLink);
         assertTrue(page.url().contains("//docs/intro"));
     }
 
     @Step
-    public void clickApiLink() {
+    public static void clickApiLink() {
         page.click(apiLink);
     }
 
     @Step
-    public void hoverOverJavaDropdown() {
+    public static void hoverOverJavaDropdown() {
         page.hover(dropdownLink);
     }
 
     @Step
-    public void clickJavaAccessibilityLink() {
+    public static void clickJavaAccessibilityLink() {
         page.click(accessibilityLink);
     }
 
     @Step
-    public void clickCommunityLink() {
+    public static void clickCommunityLink() {
         page.click(communityLink);
     }
 }

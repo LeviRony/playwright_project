@@ -11,12 +11,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class BaseTest {
-    Logger log = LoggerFactory.getLogger(BaseTest.class);
 
     protected Playwright playwright;
     protected Browser browser;
     protected BrowserContext context;
     protected Page page;
+    Logger log = LoggerFactory.getLogger(BaseTest.class);
 
     @BeforeSuite
     @Parameters("browserName")
@@ -45,7 +45,7 @@ public class BaseTest {
     @BeforeMethod
     public void createContextAndPage() {
         context = browser.newContext();
-            log.info("Start tracing");
+        log.info("Start tracing");
         context.tracing().start(new Tracing.StartOptions()
                 .setSnapshots(true)
                 .setScreenshots(true)
@@ -54,24 +54,16 @@ public class BaseTest {
     }
 
 
-
     @AfterMethod
     public void closeContext(Method method) throws IOException {
         if (context != null) {
-            // Ensure folder exists
             Files.createDirectories(Paths.get("trace-records"));
-
-            // Determine trace file name
             String testNameAnnotation = method.getAnnotation(Test.class).testName();
             String traceName = testNameAnnotation.isEmpty() ? method.getName() : testNameAnnotation;
-
-            // Stop tracing and save zip
+            log.info("Stop tracing and save zip");
             context.tracing().stop(new Tracing.StopOptions()
                     .setPath(Paths.get("trace-records/" + traceName + ".zip")));
-
-            // Colored console message
             System.out.println("\u001B[34m[INFO] Trace exported: trace-records/" + traceName + ".zip\u001B[0m");
-
             context.close();
         }
     }
