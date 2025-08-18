@@ -10,10 +10,10 @@ public class BaseTest {
     protected BrowserContext context;
     protected Page page;
 
-
-    @BeforeClass
+    // Launch browser once per suite, optionally parameterized
+    @BeforeSuite
     @Parameters("browserName")
-    public void launchBrowser(String browserName) {
+    public void launchBrowser(@Optional("chromium") String browserName) {
         playwright = Playwright.create();
 
         switch (browserName.toLowerCase()) {
@@ -27,8 +27,8 @@ public class BaseTest {
                 browser = playwright.webkit().launch(new BrowserType.LaunchOptions().setHeadless(false));
                 break;
             case "edge":
-                browser = playwright.chromium().launch(
-                        new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false));
+                browser = playwright.chromium()
+                        .launch(new BrowserType.LaunchOptions().setChannel("msedge").setHeadless(false));
                 break;
             default:
                 throw new IllegalArgumentException("Unknown browser: " + browserName);
@@ -50,7 +50,7 @@ public class BaseTest {
         if (context != null) context.close();
     }
 
-    @AfterClass
+    @AfterSuite
     public void closeBrowser() {
         if (browser != null) browser.close();
         if (playwright != null) playwright.close();

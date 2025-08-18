@@ -1,3 +1,5 @@
+package testCases;
+
 import configurations.BaseTestApi;
 import com.microsoft.playwright.APIResponse;
 import com.google.gson.JsonObject;
