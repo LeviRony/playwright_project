@@ -1,6 +1,5 @@
 package testCases;
 
-
 import configurations.BaseTest;
 import configurations.BaseUri;
 import dataProviders.Navbar;
@@ -10,7 +9,7 @@ import pageObjects.LoginPage;
 
 public class linkedin extends BaseTest {
 
-    @Test
+    @Test(testName = "Login")
     public void login() {
         navigateTest(BaseUri.linkedinUrl());
         Navbar navbar = new Navbar(page);

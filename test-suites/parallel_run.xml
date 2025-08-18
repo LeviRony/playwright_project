@@ -4,28 +4,28 @@
     <test name="Chromium Test">
         <parameter name="browserName" value="chromium"/>
         <classes>
-            <class name="PlaywrightUI"/>
+            <class name="configurations.PlaywrightUI"/>
         </classes>
     </test>
 
     <test name="Firefox Test">
         <parameter name="browserName" value="firefox"/>
         <classes>
-            <class name="PlaywrightUI"/>
+            <class name="configurations.PlaywrightUI"/>
         </classes>
     </test>
 
     <test name="WebKit Test">
         <parameter name="browserName" value="webkit"/>
         <classes>
-            <class name="PlaywrightUI"/>
+            <class name="configurations.PlaywrightUI"/>
         </classes>
     </test>
 
     <test name="Edge Test">
         <parameter name="browserName" value="edge"/>
         <classes>
-            <class name="PlaywrightUI"/>
+            <class name="configurations.PlaywrightUI"/>
         </classes>
     </test>
 

@@ -3,14 +3,21 @@ package configurations;
 import com.microsoft.playwright.*;
 import org.testng.annotations.*;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class BaseTest {
+    Logger log = LoggerFactory.getLogger(BaseTest.class);
 
     protected Playwright playwright;
     protected Browser browser;
     protected BrowserContext context;
     protected Page page;
 
-    // Launch browser once per suite, optionally parameterized
     @BeforeSuite
     @Parameters("browserName")
     public void launchBrowser(@Optional("chromium") String browserName) {
@@ -38,16 +45,38 @@ public class BaseTest {
     @BeforeMethod
     public void createContextAndPage() {
         context = browser.newContext();
+            log.info("Start tracing");
+        context.tracing().start(new Tracing.StartOptions()
+                .setSnapshots(true)
+                .setScreenshots(true)
+                .setSources(true));
         page = context.newPage();
     }
 
     public void navigateTest(String uri) {
         page.navigate(uri);
+        System.out.println("\u001B[34m[INFO] Navigated to: " + uri + "\u001B[0m");
     }
 
     @AfterMethod
-    public void closeContext() {
-        if (context != null) context.close();
+    public void closeContext(Method method) throws IOException {
+        if (context != null) {
+            // Ensure folder exists
+            Files.createDirectories(Paths.get("trace-records"));
+
+            // Determine trace file name
+            String testNameAnnotation = method.getAnnotation(Test.class).testName();
+            String traceName = testNameAnnotation.isEmpty() ? method.getName() : testNameAnnotation;
+
+            // Stop tracing and save zip
+            context.tracing().stop(new Tracing.StopOptions()
+                    .setPath(Paths.get("trace-records/" + traceName + ".zip")));
+
+            // Colored console message
+            System.out.println("\u001B[34m[INFO] Trace exported: trace-records/" + traceName + ".zip\u001B[0m");
+
+            context.close();
+        }
     }
 
     @AfterSuite
